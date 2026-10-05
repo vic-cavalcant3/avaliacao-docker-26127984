@@ -1,0 +1,4 @@
+FROM nginx:1.27-alpine
+LABEL autor="Victor Rodrigues Cavalcante Rocha" matricula="26127984"
+COPY html/ /usr/share/nginx/html/
+EXPOSE 80

@@ -1,9 +1,9 @@
 # Respostas · Avaliação Prática de Docker · Cooperativa AgroVale (Turma A)
 
-Nome:
-Matrícula:
-Usuário do GitHub:
-Usuário do Docker Hub:
+Nome: Victor Rodrigues Cavalcante Rocha      
+Matrícula: 26127984
+Usuário do GitHub: vic-cavalcant3
+Usuário do Docker Hub: viccavalcante
 
 Responda com as suas palavras e com o que aconteceu na SUA máquina. Resposta curta e certa vale mais
 do que texto longo copiado. Resposta que contradiz o seu próprio Dockerfile ou compose vale zero.
