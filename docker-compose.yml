@@ -1,0 +1,45 @@
+services:
+  portal:
+    image: viccavalcante/agrovale-portal:1.0-26127984
+    ports:
+      - "8084:80"
+    restart: unless-stopped
+    networks:
+      - rede-agrovale
+
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - dados-banco:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - rede-agrovale
+
+  blog:
+    image: wordpress:6-apache
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${MARIADB_DATABASE}
+      WORDPRESS_DB_USER: ${MARIADB_USER}
+      WORDPRESS_DB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - "9084:80"
+    volumes:
+      - arquivos-blog:/var/www/html
+    restart: unless-stopped
+    networks:
+      - rede-agrovale
+
+networks:
+  rede-agrovale:
+
+volumes:
+  dados-banco:
+  arquivos-blog:
