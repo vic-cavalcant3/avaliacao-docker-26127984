@@ -27,11 +27,15 @@ do que texto longo copiado. Resposta que contradiz o seu próprio Dockerfile ou 
 
 | # | Instrução | O que estava errado | O que você viu acontecer | Como corrigiu |
 |---|---|---|---|---|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
+| 1 | COPY (faltando) | O Dockerfile não copiava a pasta `site/` para dentro da imagem | O container subiu normal, mas em localhost:7084 apareceu "Welcome to nginx!" em vez da página de manutenção | Adicionei `COPY site/ .` |
+
+| 2 | WORKDIR | Apontava para `/usr/share/nginx`, mas o Nginx serve os arquivos de `/usr/share/nginx/html` | Com o COPY usando `.`, o arquivo ia parar na pasta errada | Troquei para `WORKDIR /usr/share/nginx/html` |
+
+
 
 6. Qual a diferença entre `-p 7042:80` e `-p 80:7042` no `docker run`? Qual dos dois números é a porta do container?
+
+O formato é `-p porta_do_host:porta_do_container`. No `-p 7042:80` eu acesso pela porta 7042 do meu PC e ela vai pra porta 80 do container, onde o Nginx está rodando, então funciona. No `-p 80:7042` eu acessaria pela porta 80 do PC, mas ia cair na 7042 do container, onde não tem nada escutando, então a página não abre. A porta do container é sempre o número da direita.
 
 ## Parte 4 · docker-compose.yml
 
