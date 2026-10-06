@@ -41,8 +41,15 @@ O formato é `-p porta_do_host:porta_do_container`. No `-p 7042:80` eu acesso pe
 
 7. No serviço `blog`, por que `WORDPRESS_DB_HOST` recebe `db` e não `localhost`?
 
-8. Por que o serviço `db` não publica a porta 3306? Se precisar consultar o banco, como faz sem publicar
-   a porta? Mostre o comando.
+Porque cada serviço roda no seu próprio container. Se eu colocar `localhost`, o WordPress vai procurar o banco dentro do próprio container dele, e lá não tem banco nenhum. Como os dois estão na mesma rede do compose, o Docker resolve o nome do serviço `db` para o IP do container do banco, então o WordPress acha o MariaDB pelo nome.
+
+8. Por que o serviço `db` não publica a porta 3306? Se precisar consultar o banco, como faz sem publicar a porta? Mostre o comando.
+
+Porque só o WordPress precisa falar com o banco, e ele faz isso pela rede interna do compose. Publicar a 3306 deixaria o banco exposto pra fora sem necessidade, o que é um risco de segurança. No `docker compose ps` dá pra ver que o `db` aparece só com `3306/tcp`, sem `0.0.0.0`. Pra consultar o banco eu entro direto no container:
+
+docker compose exec db mariadb -u agrovale -p agrovale_blog
+
+Ele pede a senha do `.env` e abre o terminal do MariaDB.
 
 ## Parte 5 · Persistência
 
