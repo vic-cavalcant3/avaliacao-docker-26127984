@@ -12,7 +12,6 @@ do que texto longo copiado. Resposta que contradiz o seu próprio Dockerfile ou 
 
 1. Qual imagem base você usou e qual o tamanho final da imagem do portal (saída de `docker images`)?
 
-
  Usei a imagem nginx:1.27-alpine como base, porque é a oficial do Nginx e a versão alpine é mais leve. No docker images, a imagem do portal ficou com 73.6MB.
 
 2. Em qual pasta do container o Nginx procura os arquivos do site? Mostre o comando que você usou para conferir que o `index.html` está lá dentro.
